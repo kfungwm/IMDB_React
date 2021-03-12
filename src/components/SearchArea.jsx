@@ -1,25 +1,26 @@
 import React, {useState} from "react";
-import axios from "axios";
 
-function SearchArea() {
 
-    const [input, SetInput] = useState();
+function SearchArea(props) {
 
-    const APIkey = "c964d7dd";
+    const [input, setInput] = useState();
+    //const [headingText, setHeadingText] = useState();
 
     function handleChange(event) {
         const value = event.target.value;
-        console.log(event.target.value);
-        SetInput(value);
-
+        
+        setInput(value);
     }
 
     function handleClick(event) {
-        console.log("click" + event.target.value);
+        props.addClick(input)
+     //   setHeadingText(input); 
+        event.preventDefault();
+        setInput("")
 
     }
 
-    console.log(input);
+    
 
     return (
         <div>
