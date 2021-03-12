@@ -17,7 +17,7 @@ function MovieResult(props) {
     const request = axios.get(url);
     const response = await request; 
     const check = response.data.Response;
-    console.log(response.data);
+    //console.log(response.data);
     if(check === "False") {
        
        setNewError(response.data.Error);
@@ -28,7 +28,7 @@ function MovieResult(props) {
     }
   }
 
-  console.log("line27 " + newError);
+  
 
   useEffect(() => {
     if(props.movieValue === undefined) {
@@ -41,10 +41,15 @@ function MovieResult(props) {
         
      } else {
          api_call();
-         console.log(url);
+        // console.log(url);
      }
  }, [props]); 
   
+ function handleID(event) {
+     //console.log(event);
+     props.targetID(event)
+
+ }
 
 
   return (
@@ -53,7 +58,7 @@ function MovieResult(props) {
         {isLoading ? <div>{newError}</div> :  
         <div> 
             {movies.map((movie, index) => (
-                <div> <p>{movie.imdbID}</p>
+                <div onClick={() => handleID(movie.imdbID)} value={movie.imdbID} key={index}> <p>{movie.imdbID}</p>
                 <p>{movie.Title} </p>
                 <img src={movie.Poster}></img>
                 <p>{movie.Year}</p></div>
